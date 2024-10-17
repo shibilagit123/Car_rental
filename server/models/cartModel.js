@@ -33,12 +33,22 @@ const cartSchema = new Schema(
             required: true,
             default: 0,
         },
+        membershipId:{
+            type: Schema.Types.ObjectId,
+            ref: "memebership",
+        },
+        days:{
+            type: Number,
+            required: true,
+            default: 1,
+        }
+
     },
     { timestamps: true }
 );
 
 cartSchema.methods.calculateTotalPrice = function () {
-    this.totalPrice = this.courses.reduce((total, course) => total + course.price, 0);
+    this.totalPrice = this.car.reduce((total, car) => total + car.price, 0);
 };
 
 export const Cart = model("Cart", cartSchema);

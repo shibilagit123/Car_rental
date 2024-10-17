@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import {  mongoose, Schema, model } from "mongoose";
 
 const carSchema = new mongoose.Schema(
   {
@@ -12,20 +12,20 @@ const carSchema = new mongoose.Schema(
     model: {
       type: String,
       required: true,
-      minLength: 20,
+      minLength: 3,
       maxLength: 300,
     },
     oil_type: {
       type: String,
-      enum: ["Petrol", "Deisel"],
+      // enum: ["Petrol", "Deisel"],
       required: true,
-      minLength: 20,
+      minLength: 3,
       maxLength: 300,
     },
     description: {
       type: String,
       required: true,
-      minLength: 20,
+      minLength: 5,
       maxLength: 300,
     },
     
@@ -37,16 +37,38 @@ const carSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    duration: {
-        type: String,
-        required: true,
+    seat: {
+      type: Number,
+      required: true,
     },
+    milage: {
+      type: String,
+      required: true,
+    },
+    gear: {
+      type: String,
+      required: true,
+    },
+    brandId: {
+      type: Schema.Types.ObjectId,
+      ref: "Brand",
+      // required: true,
+  },
+  carownerId: {
+    type: Schema.Types.ObjectId,
+    ref: "Carowner",
+    // required: true,
+},
+    // duration: {
+    //     type: String,
+    //     required: true,
+    // },
     image: {
       type: String,
        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQaLGtEd0MJro4X9wDmT2vrvLT-HjKkyyWVmg&s",
     },
-    brand: { type: mongoose.Types.ObjectId, ref: "brand" },
-    carowner: { type: mongoose.Types.ObjectId, ref: "carowner" },
+    // brandId: { type: mongoose.Types.ObjectId, ref: "brand" },
+    // carownerId: { type: mongoose.Types.ObjectId, ref: "carowner" },
   },
   { timestamps: true }
 );

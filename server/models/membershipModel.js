@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const brandSchema = new mongoose.Schema(
+const membershipSchema = new mongoose.Schema(
   {
     title: {
       type: String,
@@ -15,9 +15,19 @@ const brandSchema = new mongoose.Schema(
       minLength: 5,
       maxLength: 300,
     },
+    amount:
+    {
+      type:String,
+      required:true,
+    },
+    validity:
+    {
+      type:String,
+      required:true,
+    },
    
   },
   { timestamps: true }
 );
 
-export const Brand = mongoose.model("Brand", brandSchema);
+export const Membership = mongoose.model("Membership", membershipSchema);

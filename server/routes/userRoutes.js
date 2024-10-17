@@ -5,7 +5,7 @@ const router = e.Router();
 
 router.post("/sign-up", userSignup);
 
-router.post("/log-in", userLogin);
+router.post("/login", userLogin);
 
 router.get("/profile", authUser, userProfile);
 
