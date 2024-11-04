@@ -5,7 +5,7 @@ import { upload } from "../middlewares/multer.js";
 const router = e.Router();
 
 
-router.get("/all-cars", authUser, findAllcars);
+router.get("/all-cars",  findAllcars);
 router.get("/carDetails/:id", authUser, fetchcarsDetails);
 router.post("/create", authUser, upload.single('image'), createCar);
 router.put("/update",authUser,upload.single('image'), updateCar);

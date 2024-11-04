@@ -2,11 +2,13 @@ import { cloudinaryInstance } from "../config/cloudinaryConfig.js";
 import { Car } from "../models/carModel.js";
 // import { handleImageUpload } from "../utils/cloudinary.js";
 
+
 export const findAllcars = async (req, res, next) => {
     try {
         const carList = await Car.find();
-
+    
         res.json({ message: "car list fetched", data: carList });
+        
     } catch (error) {
         console.log(error);
         res.status(error.statusCode || 500).json(error.message || "Internal server error");
@@ -16,8 +18,10 @@ export const findAllcars = async (req, res, next) => {
 export const fetchcarsDetails = async (req, res, next) => {
     try {
         const { carId } = req.params;
+        const cId =req.params;
 
-        const carDetails = await Car.findOne({ _id: carId });
+        const carDetails = await Car.findById(cId);
+        console.log(carDetails);
 
         res.json({ message: "car details fetched", data: carDetails });
     } catch (error) {

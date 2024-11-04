@@ -22,12 +22,26 @@ export const userSignup = async (req, res, next) => {
 
         const token = generateToken(newUser._id);
 
-        res.cookie("token", token);
+        // res.cookie("token", token);
+        res.cookie("token", token,{
+            sameSite:"None",
+            secure:true,
+            httpOnly:true
+        });
 
         res.json({ success: true, message: "user created successfully" });
     } catch (error) {
         console.log(error);
     res.status(error.statusCode || 500).json(error.message || 'Internal server error')        
+    }
+};
+export const checkUser = async (req, res, next) => {
+    try {
+
+        res.json({ success: true, message: "autherized user" });
+    } catch (error) {
+        console.log(error);
+        res.status(error.statusCode || 500).json(error.message || 'Internal server error')
     }
 };
 
@@ -50,7 +64,11 @@ export const userLogin = async (req, res, next) => {
 
         const token = generateToken(userExist._id);
 
-        res.cookie("token", token);
+        res.cookie("token", token,{
+            sameSite:"None",
+            secure:true,
+            httpOnly:true
+        });
         res.json({ success: true, message: "user login successfull" });
     } catch (error) {
         console.log(error);
@@ -75,7 +93,11 @@ export const userProfile = async (req, res, next) => {
 export const userLogout = async (req, res, next) => {
     try {
 
-        res.clearCookie('token')
+        res.clearCookie("token",{
+            sameSite:"None",
+            secure:true,
+            httpOnly:true
+        });
         res.json({ success: true, message: "user logged out" });
     } catch (error) {
         console.log(error);
@@ -83,12 +105,3 @@ export const userLogout = async (req, res, next) => {
     }
 };
 
-export const checkUser = async (req, res, next) => {
-    try {
-
-        res.json({ success: true, message: "autherized user" });
-    } catch (error) {
-        console.log(error);
-        res.status(error.statusCode || 500).json(error.message || 'Internal server error')
-    }
-};

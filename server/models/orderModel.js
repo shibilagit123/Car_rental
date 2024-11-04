@@ -1,12 +1,13 @@
 import { Schema, model } from "mongoose";
 
-const cartSchema = new Schema(
+const orderSchema = new Schema(
     {
         userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
+      
         car: [
             {
                 carId: {
@@ -41,16 +42,35 @@ const cartSchema = new Schema(
             type: Number,
             required: true,
             default: 1,
+        },
+        proof:{
+          type:string,
+          required:true,
+          
+        },
+        proof:{
+             type:String,
+		    default: "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg",
+        },
+
+        status:{
+            type:String,
+            required:true,
+            default:1,
+        },
+        payment_status:{
+            type:String,
+            required:true,
+            default:1,
         }
+
 
     },
     { timestamps: true }
 );
 
-cartSchema.methods.calculateTotalPrice = function () {
-    this.totalPrice = this.car.reduce((total, car) => total + car.price, 0);
-};
 
-export const Cart = model("Cart", cartSchema);
+
+export const Checkout = model("Checkout", checkoutSchema);
 
 

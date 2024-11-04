@@ -6,9 +6,11 @@ const reviewSchema = new mongoose.Schema({
         ref: "User",
         required: true,
     },
-    courseId: {
+    car: [
+        {
+    carId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Course",
+        ref: "Car",
         required: true,
     },
     rating: {
@@ -22,10 +24,13 @@ const reviewSchema = new mongoose.Schema({
         trim: true,
         maxlength: 500,
     },
+},
+    ],
     createdAt: {
         type: Date,
         default: Date.now,
     },
+
 });
 
 export const Review = mongoose.model("Review",reviewSchema)
