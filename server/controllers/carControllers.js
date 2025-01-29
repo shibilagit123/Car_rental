@@ -1,5 +1,6 @@
 import { cloudinaryInstance } from "../config/cloudinaryConfig.js";
 import { Car } from "../models/carModel.js";
+import mongoose from "mongoose";
 // import { handleImageUpload } from "../utils/cloudinary.js";
 
 
@@ -18,9 +19,12 @@ export const findAllcars = async (req, res, next) => {
 export const fetchcarsDetails = async (req, res, next) => {
     try {
         const { carId } = req.params;
-        const cId =req.params;
-
-        const carDetails = await Car.findById(cId);
+        // const cId =req.params;
+        const cId = typeof params === 'object' ? params.id : params;
+        if (!mongoose.Types.ObjectId.isValid(cId)) {
+            throw new Error('Invalid ID format');
+        }
+        const carDetails = await Car.findOne({ _id:(cId)});
         console.log(carDetails);
 
         res.json({ message: "car details fetched", data: carDetails });
